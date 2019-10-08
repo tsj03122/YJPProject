@@ -8,7 +8,6 @@ public class PlayerStats : MonoBehaviour
     public float damage = 0f;
     public float attackSpeed = 0f;
     public float hp = 0f;
-    public float Shield = 0f;
     public string skils1 = "";
     public string skils2 = "";
 
