@@ -5742,9 +5742,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280592104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dff64613f178874a952b6bd3dc5e7f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ff1027b1715a87439c0171743c4196c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillFilter: {fileID: 163277675}
+  coolTime: 0
 --- !u!114 &1280592107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6873,6 +6875,11 @@ PrefabInstance:
       propertyPath: spBar
       value: 
       objectReference: {fileID: 1653033356}
+    - target: {fileID: 1671231248350290227, guid: 8ea4b649c5eb4c24fb32adacd175b276,
+        type: 3}
+      propertyPath: damage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1363710555920719388, guid: 8ea4b649c5eb4c24fb32adacd175b276,
         type: 3}
       propertyPath: m_Offset.y
@@ -6901,11 +6908,6 @@ PrefabInstance:
     - target: {fileID: 4445349802548954, guid: 8ea4b649c5eb4c24fb32adacd175b276, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671231248350290227, guid: 8ea4b649c5eb4c24fb32adacd175b276,
-        type: 3}
-      propertyPath: damage
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ea4b649c5eb4c24fb32adacd175b276, type: 3}
