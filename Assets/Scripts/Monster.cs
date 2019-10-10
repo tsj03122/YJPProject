@@ -33,9 +33,9 @@ public class Monster : MonoBehaviour
     private Vector2 direction;              //플레이어 방향
 
     //공격관련
-    private float timeCount = 0.0f;         //쿨타임 타이머
     private GameObject attackArea_obj;      //공격판정 범위 변수
-    public GameObject attckTarget;         //공격 대상
+    [SerializeField]
+    public GameObject attackTarget;         //공격 대상
 
     //기타
     private Animator myAnimator;            //내 애니메이션
@@ -77,9 +77,9 @@ public class Monster : MonoBehaviour
             isDead = true;
             CancelInvoke();
             StopCoroutine("Attack");
-            //myAnimator.SetBool("isattacking", false);
-            //myAnimator.SetBool("iswalking", false);
-            //myAnimator.SetBool("isdead", true);
+            myAnimator.SetBool("Attack", false);
+            myAnimator.SetBool("Move", false);
+            myAnimator.SetBool("Die", true);
             StartCoroutine("End");
 
         }
@@ -96,7 +96,7 @@ public class Monster : MonoBehaviour
             }
 
             //공격명령
-            if (attckTarget != null && attackFlag == false)
+            if (attackTarget != null && attackFlag == false)
             {
                 //공격플래그
                 attackFlag = true;
@@ -110,7 +110,7 @@ public class Monster : MonoBehaviour
             // Player의 위치와 이 객체의 위치를 빼고 단위 벡터화 한다.
             direction = (target_position.position - this.transform.position);
 
-            if (distance <= visualRange && !attackFlag)
+            if (distance <= visualRange && !attackFlag && !isDead)
             {
                 soleFlag = true;        //시야 이탈 플래그
 
@@ -148,13 +148,17 @@ public class Monster : MonoBehaviour
 
             if (nextMove != 0)
             {
-                //myAnimator.SetBool("iswalking", true);
-                transform.localScale = new Vector3(vision, 1f, 1f);
+                myAnimator.SetBool("Move", true);
+                myAnimator.SetBool("Idle", false);
+                myAnimator.SetBool("Attack", false);
+                transform.localScale = new Vector3(-vision, 1f, 1f);     //Flip
                 rigid.velocity = new Vector2(nextMove * speed, rigid.velocity.y);
             }
             else
             {
-                //myAnimator.SetBool("iswalking", false);
+                myAnimator.SetBool("Move", false);
+                myAnimator.SetBool("Idle", true);
+                myAnimator.SetBool("Attack", false);
             }
 
             //플랫폼 체크
@@ -189,7 +193,7 @@ public class Monster : MonoBehaviour
     {
         while (true)
         {
-            if(attckTarget != null)
+            if(attackTarget != null)
             {
                 float temp = coolTime - attckTiming;
 
@@ -198,19 +202,25 @@ public class Monster : MonoBehaviour
                 //nextMove = 0 으로 고정(정지상태)
                 nextMove = 0;
                 //Debug.Log("코루틴_공격 시작모션");
-                //myAnimator.SetBool("iswalking", false);
-                //myAnimator.SetBool("isattacking", true);
+                myAnimator.SetBool("Move", false);
+                myAnimator.SetBool("Attack", true);
+                myAnimator.SetBool("Idle", false);
                 yield return new WaitForSeconds(attckTiming);
                 //Debug.Log("거리 : " + distance + ", 공격사거리 : " + attackRange);
                 //Debug.Log("시선 : " + vision + ", 방향 : " + direction);
 
                 //Debug.Log("공격시도");
-                Debug.Log("몬스터 공격_공격력 : " + damage);
-                attckTarget.GetComponent<PlayerStats>().onDamagedHit(damage);
+                if (attackTarget != null)
+                {
+                    Debug.Log("몬스터 공격_공격력 : " + damage);
+                    attackTarget.GetComponent<PlayerStats>().onDamagedHit(damage);
+                }
 
-                //myAnimator.SetBool("isattacking", false);
+                myAnimator.SetBool("Move", false);
+                myAnimator.SetBool("Attack", false);
+                myAnimator.SetBool("Idle", false);
                 Invoke("Think", nextTinkTime);
-                Debug.Log("몬스터_공격 타이밍! :" + temp);
+                //Debug.Log("몬스터_공격 타이밍! :" + temp);
                 yield return new WaitForSeconds(temp);
                 //공격플래그 해제
                 attackFlag = false;
@@ -222,13 +232,16 @@ public class Monster : MonoBehaviour
 
     IEnumerator End()
     {
+        //nextMove = 0 으로 고정(정지상태)
+        nextMove = 0;
 
         yield return new WaitForSeconds(0.9f);
 
-        //while (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f)
-        //{
+        //몬스터 사망 애니메이션 체크
+        while (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+        {
 
-        //}
+        }
 
         gameObject.SetActive(false);
 
