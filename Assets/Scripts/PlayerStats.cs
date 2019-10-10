@@ -48,6 +48,13 @@ public class PlayerStats : MonoBehaviour
             GameManager.m_instanceGM.playerDie = true;
             return;
         }
-        
+    }
+
+    public void SetSP(float sp)
+    {
+        if(spBar.value != 100)
+        {
+            spBar.value += 5;
+        }
     }
 }

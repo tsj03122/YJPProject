@@ -71,6 +71,11 @@ public class Monster : MonoBehaviour
         //    return;
         //}
 
+        if (GameManager.m_instanceGM.playerSpecialSkill)
+        {
+            return;
+        }
+
         //사망체크
         if (hp <= 0 || isDead)
         {
@@ -86,8 +91,6 @@ public class Monster : MonoBehaviour
 
         if (!isDead)
         {
-
-
 
             //몬스터 시선
             if (nextMove != 0)
