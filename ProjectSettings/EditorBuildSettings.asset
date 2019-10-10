@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Temp/00 pdd/Login.unity
-    guid: 0e1a45d484c70ab4e9feddaa2b8cc876
+    path: Assets/Scenes/Main.unity
+    guid: e36e267882ec93b4f903b91e438c4a71
   - enabled: 1
-    path: Assets/Scenes/Temp/00 pdd/Main.unity
-    guid: 5b2524efe40bf0b4ebe5635ff92a8b16
+    path: Assets/Scenes/Login.unity
+    guid: 117c5316e35ceeb43b4ca326d5675edf
   - enabled: 1
-    path: Assets/Scenes/Temp/00 pdd/Dungeon.unity
-    guid: 3edd18c83af79794297df2f5be6f9dbe
+    path: Assets/Scenes/Dungeon.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
