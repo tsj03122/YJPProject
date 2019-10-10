@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
 
     //좌측이 트루
     public bool playerDirection = false;
-    public float specialTime;
+    public float specialTime = 0f;
     public float playerSpeed = 4.5f;
     public float attackTimer = 0f;
     public float move = 0f;
@@ -29,56 +29,38 @@ public class PlayerControl : MonoBehaviour
         GameManager.m_instanceGM.PlayerEquipmentSetting();
     }
 
-    void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
         canJump = false;
         move = Input.GetAxis("Horizontal");
         attackTimer += Time.deltaTime;
-        Jump();
-        Move();
-
-        //공격
-        if (Input.GetKey(KeyCode.A) && attackTimer > myStats.attackSpeed && SceneManager.GetActiveScene().name.Equals("Dungeon"))
+        //공격 쿨타임
+        if (attackTimer >= 0.5f && SceneManager.GetActiveScene().name.Equals("Dungeon"))
         {
-            Attack();
-            attackTimer = 0f;
-        }
-        //공격 키 마을에서 활성화
-        else if (Input.GetKey(KeyCode.A) && SceneManager.GetActiveScene().name.Equals("Main") && potal)
-        {
-            GameManager.m_instanceGM.dungeonStage.SetActive(true);
+            //myStats.weapon.transform.localPosition = new Vector3(0.057f, 0, 0);
+            if (playerDirection)
+            {
+                myStats.weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 40f));
+            }
+            else
+            {
+                myStats.weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -40f));
+            }
         }
 
-        //스페셜 스킬
-        if (Input.GetKeyDown(KeyCode.F) && specialTime == 100 && SceneManager.GetActiveScene().name.Equals("Dungeon"))
-        {
-            myStats.spBar.value = 0;
-            GameManager.m_instanceGM.playerSpecialSkill = true;
-        }
-    }
-
-    public void Jump()
-    {
         //점프 부분
-        if (!canJump)
+        if(!canJump)
         {
-            Debug.DrawRay(transform.position, new Vector2(0, -0.6f), new Color(255, 0, 0));
+            Debug.DrawRay(transform.position, new Vector2(0,-0.6f),new Color(255,0,0));
+            //RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, size, 1 << LayerMask.NameToLayer("Ground"));
             RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Foreground"));
             if (hit2d)
             {
-                canJump = true;
+                    canJump = true;
             }
         }
-        //점프
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            myRigidbody.AddForce(transform.up * jumpSpeed * 100);
-            canJump = false;
-        }
-    }
 
-    public void Move()
-    {
         //움직임
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -101,6 +83,41 @@ public class PlayerControl : MonoBehaviour
             myAnimator.SetBool("Move", false);
             myAnimator.SetBool("Idle", true);
         }
+
+        //점프
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            myRigidbody.AddForce(transform.up * jumpSpeed * 100);
+            canJump = false;
+        }
+
+        //공격
+        if (Input.GetKey(KeyCode.A) && attackTimer > myStats.attackSpeed && SceneManager.GetActiveScene().name.Equals("Dungeon"))
+        {
+            //myStats.weapon.transform.localPosition = new Vector3(0.057f, -0.106f, 0);
+            if (playerDirection)
+            {
+                myStats.weapon.transform.Rotate(new Vector3(180, 0, 90f));
+            }
+            else if(!playerDirection)
+            {
+                myStats.weapon.transform.Rotate(new Vector3(-180, 0, -90f));
+            }
+            Attack();
+            attackTimer = 0f;
+        }
+        //공격 키 마을에서 활성화
+        else if(Input.GetKey(KeyCode.A) && SceneManager.GetActiveScene().name.Equals("Main") && potal)
+        {
+            GameManager.m_instanceGM.dungeonStage.SetActive(true);
+        }
+
+        //스페셜 스킬
+        if(Input.GetKeyDown(KeyCode.F) && specialTime == 100 && SceneManager.GetActiveScene().name.Equals("Dungeon"))
+        {
+            GameManager.m_instanceGM.playerSpecialSkill = true;
+        }
+        
     }
     public void Attack()
     {
@@ -111,12 +128,6 @@ public class PlayerControl : MonoBehaviour
             {
                 int damage = (int) Random.Range((myStats.damage - (myStats.damage * 0.2f)), (myStats.damage + (myStats.damage * 0.2f)));
                 weapon.monsterList[i].OnDamageHit(damage);
-                if(specialTime != 100)
-                {
-                    specialTime += 5;
-                    myStats.SetSP(specialTime);
-                }
-                
             }
         }
     }

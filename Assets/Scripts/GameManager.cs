@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public GameObject dungeonStage;
     public bool playerDie = false;
     public bool playerSpecialSkill = false;
-    float timer = 0;
     
     void Awake()
     {
@@ -24,17 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (playerSpecialSkill)
-        {
-            timer += Time.deltaTime;
-            if(timer > 5)
-            {
-                playerSpecialSkill = false;
-                timer = 0f;
-            }
-        }
-
-        if (playerControl != null)
+        if(playerControl != null)
         {
             if (playerDie)
             {
