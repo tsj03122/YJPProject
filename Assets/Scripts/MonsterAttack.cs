@@ -9,7 +9,7 @@ public class MonsterAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            abcd.attackTarget = collision.gameObject;
+            abcd.attckTarget = collision.gameObject;
             
         }
     }
@@ -18,7 +18,7 @@ public class MonsterAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            abcd.attackTarget = null;
+            abcd.attckTarget = null;
         }
     }
 }
