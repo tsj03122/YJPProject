@@ -38,9 +38,10 @@ public class Down : MonoBehaviour
             }
             else { waitTime -= waitTime*Time.deltaTime; } 
         }
-        if (Input.GetKey(KeyCode.Space)||ReversTime>=0.135f )
+        if (ReversTime>=0.135f )
         {
             effetor.rotationalOffset = 0f;
+            ReversTime = 0.1f;
         }
     }
 }
