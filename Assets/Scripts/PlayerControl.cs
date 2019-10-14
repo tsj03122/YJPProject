@@ -12,8 +12,6 @@ public class PlayerControl : MonoBehaviour
     public Weapon weapon;
     public Animator myAnimator;
 
-    //좌측이 트루
-    public bool playerDirection = false;
     public float specialTime = 0f;
     public float playerSpeed = 4.5f;
     public float attackTimer = 0f;
@@ -21,6 +19,10 @@ public class PlayerControl : MonoBehaviour
     public float jumpSpeed = 3f;
     public bool canJump = true;
     public bool potal = false;
+    public bool attack = false;
+
+    public float comboAttackTimer = 0f;
+    public int comboAttack = 0;
 
     void Start()
     {
@@ -30,23 +32,24 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         canJump = false;
         move = Input.GetAxis("Horizontal");
         attackTimer += Time.deltaTime;
-        //공격 쿨타임
-        if (attackTimer >= 0.5f && SceneManager.GetActiveScene().name.Equals("Dungeon"))
+
+        //공격중인지 아닌지 여부
+        //공격한 시간이 공속보다 높으면(쿨타임차면) 공격가능)
+        if (attackTimer > myStats.attackSpeed)
         {
-            //myStats.weapon.transform.localPosition = new Vector3(0.057f, 0, 0);
-            if (playerDirection)
-            {
-                myStats.weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 40f));
-            }
-            else
-            {
-                myStats.weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -40f));
-            }
+            attack = false;
+            Move();
+        }
+        if (attack)
+        {
+            myAnimator.SetBool("Move", false);
+            myAnimator.SetBool("Idle", true);
+            return;
         }
 
         //점프 부분
@@ -61,29 +64,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        //움직임
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
-            playerDirection = false;
-            myAnimator.SetBool("Idle", false);
-            myAnimator.SetBool("Move", true);
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
-            playerDirection = true;
-            myAnimator.SetBool("Idle", false);
-            myAnimator.SetBool("Move", true);
-            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        }
-        else
-        {
-            myAnimator.SetBool("Move", false);
-            myAnimator.SetBool("Idle", true);
-        }
-
         //점프
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
@@ -92,17 +72,9 @@ public class PlayerControl : MonoBehaviour
         }
 
         //공격
-        if (Input.GetKey(KeyCode.A) && attackTimer > myStats.attackSpeed && SceneManager.GetActiveScene().name.Equals("Dungeon"))
+        if (Input.GetKey(KeyCode.A) && !attack && SceneManager.GetActiveScene().name.Equals("Dungeon"))
         {
-            //myStats.weapon.transform.localPosition = new Vector3(0.057f, -0.106f, 0);
-            if (playerDirection)
-            {
-                myStats.weapon.transform.Rotate(new Vector3(180, 0, 90f));
-            }
-            else if(!playerDirection)
-            {
-                myStats.weapon.transform.Rotate(new Vector3(-180, 0, -90f));
-            }
+            attack = true;
             Attack();
             attackTimer = 0f;
         }
@@ -117,8 +89,31 @@ public class PlayerControl : MonoBehaviour
         {
             GameManager.m_instanceGM.playerSpecialSkill = true;
         }
-        
     }
+    public void Move()
+    {
+        //움직임
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
+            myAnimator.SetBool("Idle", false);
+            myAnimator.SetBool("Move", true);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
+            myAnimator.SetBool("Idle", false);
+            myAnimator.SetBool("Move", true);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else
+        {
+            myAnimator.SetBool("Move", false);
+            myAnimator.SetBool("Idle", true);
+        }
+    }
+
     public void Attack()
     {
         myAnimator.SetTrigger("Attack");

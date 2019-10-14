@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Temp\01 kjh\Down.cs" />
     <Compile Include="Assets\Scripts\ArmorInformation.cs" />
     <Compile Include="Assets\Scripts\BarScript.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
