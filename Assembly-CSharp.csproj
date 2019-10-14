@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3E961576-2082-F494-3027-51EA5504CC9C}</ProjectGuid>
+    <ProjectGuid>{66081B4B-946B-B34E-28CA-5F652BD6D8BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -84,37 +84,37 @@
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\WeaponInformation.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/NOPProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/MiniProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -294,37 +294,37 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>D:/NOPProject/Assets/Plugins/BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>D:/NOPProject/Assets/Plugins/Google.Protobuf.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="I18N.CJK">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.CJK.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.CJK.dll</HintPath>
     </Reference>
     <Reference Include="I18N">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.dll</HintPath>
     </Reference>
     <Reference Include="I18N.MidEast">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.MidEast.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.MidEast.dll</HintPath>
     </Reference>
     <Reference Include="I18N.Other">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.Other.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.Other.dll</HintPath>
     </Reference>
     <Reference Include="I18N.Rare">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.Rare.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.Rare.dll</HintPath>
     </Reference>
     <Reference Include="I18N.West">
-      <HintPath>D:/NOPProject/Assets/Plugins/I18N.West.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/I18N.West.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>D:/NOPProject/Assets/Plugins/MySql.Data.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet">
-      <HintPath>D:/NOPProject/Assets/Plugins/Renci.SshNet.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="SshNet.Security.Cryptography">
-      <HintPath>D:/NOPProject/Assets/Plugins/SshNet.Security.Cryptography.dll</HintPath>
+      <HintPath>D:/MiniProject/Assets/Plugins/SshNet.Security.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

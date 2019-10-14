@@ -55,9 +55,9 @@ public class PlayerControl : MonoBehaviour
         //점프 부분
         if(!canJump)
         {
-            Debug.DrawRay(transform.position, new Vector2(0,-0.6f),new Color(255,0,0));
+            Debug.DrawRay(transform.position, new Vector2(0,-0.8f),new Color(255,0,0));
             //RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, size, 1 << LayerMask.NameToLayer("Ground"));
-            RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Foreground"));
+            RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, 0.8f, 1 << LayerMask.NameToLayer("Foreground"));
             if (hit2d)
             {
                     canJump = true;
