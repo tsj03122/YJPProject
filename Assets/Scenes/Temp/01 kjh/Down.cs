@@ -7,6 +7,7 @@ public class Down : MonoBehaviour
     private PlatformEffector2D effetor;
     public float waitTime;
     public float ReversTime;
+    PlayerControl playerControl;
    
     void Start()
     {
@@ -16,19 +17,20 @@ public class Down : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerControl = FindObjectOfType<PlayerControl>();
         if (effetor.rotationalOffset == 180f)
         {
 
             ReversTime += ReversTime*Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.DownArrow)&&playerControl.canJump==true)
         {
             waitTime = 0.4f;
             ReversTime = 0.1f;
 
         }
        
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && playerControl.canJump == true)
         {
             if (waitTime <= 0.1f)
             {
@@ -38,7 +40,7 @@ public class Down : MonoBehaviour
             }
             else { waitTime -= waitTime*Time.deltaTime; } 
         }
-        if (ReversTime>=0.135f )
+        if (ReversTime>=0.155f )
         {
             effetor.rotationalOffset = 0f;
             ReversTime = 0.1f;
