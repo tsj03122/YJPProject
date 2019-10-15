@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D myRigidbody;
     public PlayerStats myStats;
     public Weapon weapon;
-    public Animator myAnimator;
+    public PlayerAnimationState myPlayerAnimationState;
 
     public float specialTime = 0f;
     public float playerSpeed = 4.5f;
@@ -26,7 +26,6 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        myAnimator = GetComponent<Animator>();
         GameManager.m_instanceGM.playerControl = this;
         GameManager.m_instanceGM.PlayerEquipmentSetting();
     }
@@ -47,8 +46,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (attack)
         {
-            myAnimator.SetBool("Move", false);
-            myAnimator.SetBool("Idle", true);
+            myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Idle);
             return;
         }
 
@@ -74,6 +72,7 @@ public class PlayerControl : MonoBehaviour
         //공격
         if (Input.GetKey(KeyCode.A) && !attack && SceneManager.GetActiveScene().name.Equals("Dungeon"))
         {
+            myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Attack1);
             attack = true;
             Attack();
             attackTimer = 0f;
@@ -95,28 +94,24 @@ public class PlayerControl : MonoBehaviour
         //움직임
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Move);
             myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
-            myAnimator.SetBool("Idle", false);
-            myAnimator.SetBool("Move", true);
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
+            myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Move);
             myRigidbody.velocity = new Vector2(move * playerSpeed, myRigidbody.velocity.y);
-            myAnimator.SetBool("Idle", false);
-            myAnimator.SetBool("Move", true);
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
         else
         {
-            myAnimator.SetBool("Move", false);
-            myAnimator.SetBool("Idle", true);
+            myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Idle);
         }
     }
 
     public void Attack()
     {
-        myAnimator.SetTrigger("Attack");
         if (weapon.monsterList.Count > 0)
         {
             for(int i = 0; i < weapon.monsterList.Count; i++)
