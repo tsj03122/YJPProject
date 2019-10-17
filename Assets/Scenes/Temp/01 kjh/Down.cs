@@ -40,7 +40,7 @@ public class Down : MonoBehaviour
             }
             else { waitTime -= waitTime*Time.deltaTime; } 
         }
-        if (ReversTime>=0.155f )
+        if (ReversTime>=0.155f || Input.GetKeyDown(KeyCode.Space))
         {
             effetor.rotationalOffset = 0f;
             ReversTime = 0.1f;
