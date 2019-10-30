@@ -64,6 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scenes\Temp\01 kjh\Down.cs" />
     <Compile Include="Assets\Scenes\Temp\01 kjh\Shake.cs" />
+    <Compile Include="Assets\Scenes\Temp\02 lyj\Clear.cs" />
+    <Compile Include="Assets\Scenes\Temp\02 lyj\Fade_Out.cs" />
+    <Compile Include="Assets\Scenes\Temp\02 lyj\village.cs" />
     <Compile Include="Assets\Scripts\ArmorInformation.cs" />
     <Compile Include="Assets\Scripts\BarScript.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
@@ -71,11 +74,13 @@
     <Compile Include="Assets\Scripts\ClearImage.cs" />
     <Compile Include="Assets\Scripts\Cool_Time.cs" />
     <Compile Include="Assets\Scripts\DamageTextScript.cs" />
-    <Compile Include="Assets\Scripts\DataSetting.cs" />
+    <Compile Include="Assets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Dead.cs" />
     <Compile Include="Assets\Scripts\FloatingManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GMQueue.cs" />
     <Compile Include="Assets\Scripts\HitManager.cs" />
+    <Compile Include="Assets\Scripts\MapColiider.cs" />
     <Compile Include="Assets\Scripts\Monster.cs" />
     <Compile Include="Assets\Scripts\MonsterAttack.cs" />
     <Compile Include="Assets\Scripts\MonsterHitEffect.cs" />
@@ -84,11 +89,13 @@
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\PlayerSkill.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Reset.cs" />
     <Compile Include="Assets\Scripts\RouletteController.cs" />
     <Compile Include="Assets\Scripts\Skill.cs" />
     <Compile Include="Assets\Scripts\SkillActivity.cs" />
     <Compile Include="Assets\Scripts\SkillOff.cs" />
     <Compile Include="Assets\Scripts\StageSelect.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\WeaponInformation.cs" />
     <Reference Include="Unity.Timeline.Editor">

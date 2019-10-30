@@ -17,7 +17,6 @@ public class Down : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerControl = FindObjectOfType<PlayerControl>();
         if (effetor.rotationalOffset == 180f)
         {
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    
+    public static int monster_num = 0;
     public FloatingManager fm;
     public HitManager hm;
     public Vector3 monsterCanvers;
@@ -253,7 +253,7 @@ public class Monster : MonoBehaviour
         {
 
         }
-
+        monster_num--;
         gameObject.SetActive(false);
 
     }
@@ -261,7 +261,8 @@ public class Monster : MonoBehaviour
 
     public void OnDamageHit(float damage, int AttackWay)
     {
-        GameManager.m_instanceGM.playerControl.myStats.SetSP(3);
+        GameManager.m_instanceGM.uiManager.spSlider.value += 3;
+        GameManager.m_instanceGM.uiManager.SpChange();
         monsterCanvers = Camera.main.WorldToScreenPoint(this.transform.position);
         hp -= damage;
         GMQueue gmQueue = fm.getGmQueue();

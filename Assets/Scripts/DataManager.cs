@@ -14,10 +14,8 @@ using System.Web;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DataSetting : MonoBehaviour
+public class DataManager : MonoBehaviour
 {
-    public static GameManager m_instanceGM { get; private set; } = null;
-    public static DataSetting m_instraintDS { get; private set; } = null;
     static MySqlConnection sqlconn = null;
     private string sqlDBip = "testdbminiproject.cnqdptoslmij.ap-northeast-2.rds.amazonaws.com";
     private string sqlDBname = "testdbminiproject";
@@ -29,16 +27,10 @@ public class DataSetting : MonoBehaviour
     public string id;
     public string pw;
 
-    void Awake()
-    {
-        if (m_instraintDS == null)
-        {
-            m_instraintDS = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-    }
     void Start()
     {
+        GameManager.m_instanceGM.dataManager = this;
+        DontDestroyOnLoad(this.gameObject);
         //IPv4 172.30.1.52
         userIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(a => a.AddressFamily == AddressFamily.InterNetwork).ToString();
         Debug.Log(userIP);
@@ -81,10 +73,10 @@ public class DataSetting : MonoBehaviour
 
         MySqlDataAdapter adapter = new MySqlDataAdapter(sqlcmd, sqlconn);
         adapter.Fill(dt); //데이터 테이블에  채워넣기를함
-        
+
         return dt; //데이터 테이블을 리턴함
     }
-        
+
     private void sqldisConnect()
     {
         sqlconn.Close();
@@ -93,9 +85,10 @@ public class DataSetting : MonoBehaviour
 
     public void MainStart()
     {
-        //화면 fade Out
-        SceneManager.LoadScene("Main");
         DontDestroyOnLoad(this);
+        DontDestroyOnLoad(GameManager.m_instanceGM.playerControl.gameObject);
+        DontDestroyOnLoad(GameManager.m_instanceGM.playerCamera.gameObject);
+        SceneManager.LoadScene("Main");
     }
 
     public void Quit()
@@ -123,11 +116,33 @@ public class DataSetting : MonoBehaviour
         id = selsql("Select * from testdbminiproject.Users where idUsers ='" + idText.text.ToString() + "';").Rows[0].ItemArray[0].ToString();
         pw = selsql("Select * from testdbminiproject.Users where idUsers ='" + idText.text.ToString() + "';").Rows[0].ItemArray[1].ToString();
 
-        if(idText.text.ToString().Equals(id) && pwText.text.ToString().Equals(pw))
+        if (idText.text.ToString().Equals(id) && pwText.text.ToString().Equals(pw))
         {
             MainStart();
         }
         sqldisConnect();
+    }
+    public void PlayerEquipmentSetting()
+    {
+        string idUsers = id;
+        string weaponItemName = selsql(
+            "select * from testdbminiproject.PlayerEquipment where idUsers = '" + idUsers + "';").Rows[0].ItemArray[1].ToString();
+        string armorItemName = selsql(
+            "select * from testdbminiproject.PlayerEquipment where idUsers = '" + idUsers + "';").Rows[0].ItemArray[2].ToString();
+        //무기
+        GameManager.m_instanceGM.playerControl.playerStats.weaponItem.itemName = weaponItemName;
+        DataTable dt = selsql(
+            "SELECT* FROM testdbminiproject.WeaponItem where WeaponName = '" + weaponItemName + "';");
+        GameManager.m_instanceGM.playerControl.playerStats.weaponItem.itemType = dt.Rows[0].ItemArray[1].ToString();
+        GameManager.m_instanceGM.playerControl.playerStats.weaponItem.damage = float.Parse(dt.Rows[0].ItemArray[2].ToString());
+        GameManager.m_instanceGM.playerControl.playerStats.weaponItem.attackSpeed = float.Parse(dt.Rows[0].ItemArray[3].ToString());
+        GameManager.m_instanceGM.playerControl.playerStats.weaponItem.attackSize = float.Parse(dt.Rows[0].ItemArray[4].ToString());
+
+        //방어구
+        GameManager.m_instanceGM.playerControl.playerStats.ArmorItem.itemName = armorItemName;
+        dt = selsql(
+            "SELECT* FROM testdbminiproject.ArmorItem where ArmorItem = '" + armorItemName + "';");
+        GameManager.m_instanceGM.playerControl.playerStats.ArmorItem.itemHP = float.Parse(dt.Rows[0].ItemArray[1].ToString());
     }
 }
 

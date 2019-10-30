@@ -11,14 +11,9 @@ public class PlayerStats : MonoBehaviour
     public float hp = 0f;
     public bool hitOn = false;
 
-    public GameObject weapon;
     public PlayerSkill playerskill;
     public WeaponInformation weaponItem;
     public ArmorInformation ArmorItem;
-    public Slider hpBar;
-    public Slider spBar;
-    public Text hpText;
-    public Text spText;
     public SpriteRenderer mySprite;
 
     public void ChangeStats()
@@ -39,28 +34,6 @@ public class PlayerStats : MonoBehaviour
         }
 
         hp = 100 + ArmorItem.itemHP;
-        SetHP(hp);
-        SetSP(0);
-    }
-
-    public void SetHP(float hp)
-    {
-        hpBar.maxValue = hp;
-        hpBar.value = hp;
-        hpText.text = "HP : " + hpBar.value;
-    }
-    
-    public void SetSP(float sp)
-    {
-        if(sp == 0)
-        {
-            spBar.value = sp;
-        }
-        else
-        {
-            spBar.value += sp;
-        }
-        spText.text = "SP : " + spBar.value;
     }
 
     public void onDamagedHit(float damage)
@@ -68,10 +41,12 @@ public class PlayerStats : MonoBehaviour
         if (!hitOn)
         {
             hp -= damage;
-            hpBar.value = hp;
-            hpText.text = "HP : " + hpBar.value;
+            GameManager.m_instanceGM.uiManager.hpSlider.value = hp;
+            GameManager.m_instanceGM.uiManager.HpChange();
             if (hp <= 0)
             {
+                GameManager.m_instanceGM.uiManager.hpSlider.value = 0;
+                GameManager.m_instanceGM.uiManager.HpChange();
                 GameManager.m_instanceGM.playerDie = true;
                 return;
             }

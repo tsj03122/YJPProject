@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FloatingManager : MonoBehaviour
 {
-    public List<GameObject> abcd;
     [SerializeField]
     private GMQueue GmQueue;
     [SerializeField]

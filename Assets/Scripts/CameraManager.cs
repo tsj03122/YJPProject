@@ -23,8 +23,7 @@ public class CameraManager : MonoBehaviour
 
     public Camera theCamera;
 
-    // Start is called before the first frame update
-    void Start()
+    public void CameraSetting()
     {
         minBound = bound.bounds.min;
         maxBound = bound.bounds.max;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
 {
-    public Monster abcd;
+    public Monster monster;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            abcd.attackTarget = collision.gameObject;
+            monster.attackTarget = collision.gameObject;
             
         }
     }
@@ -18,7 +18,7 @@ public class MonsterAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            abcd.attackTarget = null;
+            monster.attackTarget = null;
         }
     }
 }

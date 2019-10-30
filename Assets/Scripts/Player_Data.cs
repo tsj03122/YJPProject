@@ -11,8 +11,6 @@ public class Player_Data : MonoBehaviour
     public float HP = 100f;
     public float SP = 100f;
     
-
-
     private void Update()
     {
         

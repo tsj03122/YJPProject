@@ -10,11 +10,11 @@ public class BarScript : MonoBehaviour
     public Text hpText;
     public Text spText;
 
-    void Start()
+    void Awake()
     {
-        GameManager.m_instanceGM.playerControl.myStats.hpBar = hpBar;
-        GameManager.m_instanceGM.playerControl.myStats.hpText = hpText;
-        GameManager.m_instanceGM.playerControl.myStats.spBar = spBar;
-        GameManager.m_instanceGM.playerControl.myStats.spText = spText;
+        GameManager.m_instanceGM.uiManager.hpSlider = hpBar;
+        GameManager.m_instanceGM.uiManager.hpText = hpText;
+        GameManager.m_instanceGM.uiManager.spSlider = spBar;
+        GameManager.m_instanceGM.uiManager.spText = spText;
     }
 }

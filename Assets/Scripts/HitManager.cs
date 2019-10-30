@@ -8,8 +8,6 @@ public class HitManager : MonoBehaviour
     [SerializeField]
     private GMQueue skillCycle;
     private GMQueue skill2Cycle;
-
-    public List<GameObject> abcd;
     void Awake()
     {
         GameManager.m_instanceGM.hitManager = this;
