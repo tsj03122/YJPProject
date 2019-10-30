@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FloatingManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] textList;
+    public List<GameObject> abcd;
     [SerializeField]
     private GMQueue GmQueue;
     [SerializeField]
@@ -13,8 +12,9 @@ public class FloatingManager : MonoBehaviour
 
     void Awake()
     {
-        GmQueue = new GMQueue(10);
-        for (int i = 0; i < textList.Length; i++)
+        GameManager.m_instanceGM.floatingManager = this;
+        GmQueue = new GMQueue(50);
+        for (int i = 0; i < 50; i++)
         {
             GmQueue.add(canvas.transform.GetChild(i).gameObject);
         }

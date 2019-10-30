@@ -9,6 +9,4 @@ public class WeaponInformation : MonoBehaviour
     public float damage = 0f;
     public float attackSpeed = 0f;
     public float attackSize = 0f;
-    public string skils1 = "";
-    public string skils2 = "";
 }

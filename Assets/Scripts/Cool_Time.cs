@@ -29,10 +29,10 @@ public class Cool_Time : MonoBehaviour
                     if (canUseSkill)
                     {
                         coolTime = PlayerStats.attackSpeed;
-                        Debug.Log("ATT");
+                        //Debug.Log("ATT");
                     }
                     else
-                        Debug.Log("fail");
+                        //Debug.Log("fail");
                     UseSkill();
                 }
                 break;
@@ -73,7 +73,7 @@ public class Cool_Time : MonoBehaviour
         if (canUseSkill)
         {
            
-            Debug.Log("Use Skill");
+            //Debug.Log("Use Skill");
             skillFilter.fillAmount = 1; //스킬 버튼을 가림
             StartCoroutine("Cooltime");
 
@@ -82,7 +82,7 @@ public class Cool_Time : MonoBehaviour
         }
         else
         {
-            Debug.Log("아직 스킬을 사용할 수 없습니다.");
+            //Debug.Log("아직 스킬을 사용할 수 없습니다.");
         }
     }
 

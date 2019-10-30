@@ -3100,7 +3100,7 @@ Transform:
   m_Children:
   - {fileID: 142962750}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1000398613
 MonoBehaviour:
@@ -3114,7 +3114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3b7975cea277d439dceeec1ff28ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1548695163}
+  target: {fileID: 0}
   moveSpeed: 1000
   targetPosition: {x: 0, y: 0, z: 0}
   bound: {fileID: 1376589111}
@@ -3708,7 +3708,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdaab5e213399a46aae0baaec808bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitManager: {fileID: 0}
+  floatingManager: {fileID: 0}
   playerControl: {fileID: 0}
+  playerCamera: {fileID: 0}
   dungeonStage: {fileID: 0}
   playerDie: 0
   playerSpecialSkill: 0
@@ -3724,7 +3727,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509088099
 GameObject:
@@ -3859,12 +3862,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509088099}
   m_CullTransparentMesh: 0
---- !u!1 &1548695163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3644929996320713247, guid: 8ea4b649c5eb4c24fb32adacd175b276,
-    type: 3}
-  m_PrefabInstance: {fileID: 1303312925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1695114043
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,10 @@ public class Monster : MonoBehaviour
 {
     
     public FloatingManager fm;
+    public HitManager hm;
     public Vector3 monsterCanvers;
     public float specialTimer;
+    public Vector3 monsterPositionCenter;
 
     //몬스터 기본 스탯
     public float hp = 100f;                    //체력
@@ -41,11 +43,18 @@ public class Monster : MonoBehaviour
     private Animator myAnimator;            //내 애니메이션
     private float monsterRadius = 0.5f;     //몬스터 반지름
 
+
+    //피격 이펙트
+    public GameObject SwordSkillEffect; //스킬 이펙트
+    public GameObject SwordSkill2Effect; //스킬2 이펙트
+    public BoxCollider2D monsterCollider2D; // 몬스터콜라이더2d
+
     // Start is called before the first frame update
     void Start()
     {
         //자신 리지드 컴포넌트
         rigid = GetComponent<Rigidbody2D>();
+        monsterCollider2D = GetComponent<BoxCollider2D>();
         Think();                                //랜덤행동함수
 
         attackArea_obj = transform.GetChild(0).gameObject;
@@ -56,6 +65,9 @@ public class Monster : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         attackFlag = false;
         StartCoroutine("Attack");
+
+        fm = GameManager.m_instanceGM.floatingManager;
+        hm = GameManager.m_instanceGM.hitManager;
 
     }
     private void FixedUpdate()
@@ -70,6 +82,8 @@ public class Monster : MonoBehaviour
         //    }
         //    return;
         //}
+
+        monsterPositionCenter = transform.position;
 
         //사망체크
         if (hp <= 0 || isDead)
@@ -86,9 +100,6 @@ public class Monster : MonoBehaviour
 
         if (!isDead)
         {
-
-
-
             //몬스터 시선
             if (nextMove != 0)
             {
@@ -248,11 +259,14 @@ public class Monster : MonoBehaviour
     }
 
 
-    public void OnDamageHit(float damage)
+    public void OnDamageHit(float damage, int AttackWay)
     {
+        GameManager.m_instanceGM.playerControl.myStats.SetSP(3);
         monsterCanvers = Camera.main.WorldToScreenPoint(this.transform.position);
         hp -= damage;
         GMQueue gmQueue = fm.getGmQueue();
+        GMQueue effectSkillGmQueue = hm.getskillCycleGmQueue();
+        GMQueue effectSkill2GmQueue = hm.getskill2CycleGmQueue();
         GameObject textObj = gmQueue.Enqueue();
         DamageTextScript textObjText = textObj.GetComponent<DamageTextScript>();
         textObjText.target = this.gameObject;
@@ -262,6 +276,31 @@ public class Monster : MonoBehaviour
         textObjText.destroyTime = 2f;
         textObjText.text.gameObject.SetActive(true);
         gmQueue.add(textObj);
+
+        //공격 방법에 따른 (스킬, 스킬2, 평타)
+        switch (AttackWay)
+        {
+            //평타
+            case 0:
+                break;
+            //스킬
+            case 1:
+                GameObject effectSkill = effectSkillGmQueue.Enqueue();
+                SwordSkillEffect = effectSkill;
+                effectSkill.transform.position = transform.position;
+                effectSkill.SetActive(true);
+                effectSkillGmQueue.add(effectSkill);
+                break;
+            //스킬2
+            case 2:
+                GameObject effectSkill2 = effectSkill2GmQueue.Enqueue();
+                SwordSkill2Effect = effectSkill2;
+                effectSkill2.transform.position = this.transform.position;
+                effectSkill2.SetActive(true);
+                effectSkill2GmQueue.add(effectSkill2);
+                break;
+        }
+
     }
 
 

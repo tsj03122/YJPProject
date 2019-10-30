@@ -5,17 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class StageSelect : MonoBehaviour
 {
-    void Start()
-    {
-        GameManager.m_instanceGM.dungeonStage = this.gameObject;
-        this.gameObject.SetActive(false);
-    }
     public void Stage(int map)
     {
         switch (map)
         {
             case 1:
+                GameManager.m_instanceGM.playerControl.gameObject.transform.position = new Vector3(0,0,0);
+                DontDestroyOnLoad(GameManager.m_instanceGM.playerCamera.gameObject);
+                DontDestroyOnLoad(GameManager.m_instanceGM.playerControl.gameObject);
                 SceneManager.LoadScene("Dungeon");
+                GameManager.m_instanceGM.playerControl.dungeonStart = true;
                 break;
             case 2:
                 break;

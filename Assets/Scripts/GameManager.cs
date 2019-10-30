@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager m_instanceGM { get; private set; } = null;
+    public HitManager hitManager;
+    public FloatingManager floatingManager;
     public PlayerControl playerControl;
+    public GameObject playerCamera;
     public GameObject dungeonStage;
     public bool playerDie = false;
     public bool playerSpecialSkill = false;
@@ -25,11 +28,13 @@ public class GameManager : MonoBehaviour
     {
         if(playerControl != null)
         {
-            if (playerDie)
+            if (playerDie && playerControl.myPlayerAnimationState.playerNowState != PlayerAnimationState.CharacterState.Die)
             {
-                playerControl.gameObject.SetActive(false);
+                Debug.Log(playerControl.myPlayerAnimationState.playerNowState + " NowState");
+                Debug.Log(PlayerAnimationState.CharacterState.Die + " State.Die");
+                playerControl.myPlayerAnimationState.AnimationChange(PlayerAnimationState.CharacterState.Die);
             }
-        }    
+        }
     }
 
     public void PlayerEquipmentSetting()
